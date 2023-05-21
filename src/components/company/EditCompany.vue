@@ -1,10 +1,10 @@
 <template>
   <n-form ref="formRef" :label-width="80" :model="formValue" :rules="rules" size="small">
-    <n-form-item style="padding-top: 24px" label="Name" path="shop_name">
-      <n-input v-model:value="formValue.shop_name" placeholder="Enter Name" />
+    <n-form-item style="padding-top: 24px" label="Name" path="company_name">
+      <n-input v-model:value="formValue.company_name" placeholder="Enter Name" />
     </n-form-item>
-    <n-form-item style="padding-top: 4px" label="Phone" path="shop_phone">
-      <n-input v-model:value="formValue.shop_phone" placeholder="Enter Phone" />
+    <n-form-item style="padding-top: 4px" label="Phone" path="phone">
+      <n-input v-model:value="formValue.phone" placeholder="Enter Phone" />
     </n-form-item>
     <n-form-item style="padding-top: 4px" label="Address" path="address">
       <n-input v-model:value="formValue.address" placeholder="Enter Address" />
@@ -18,13 +18,13 @@
     <n-form-item style="padding-top: 4px" label="Country" path="country">
       <n-input v-model:value="formValue.country" placeholder="Enter Country" />
     </n-form-item>
-    <n-form-item style="padding-top: 4px" label="Active" path="is_active">
-      <n-space>
-        <n-switch />
-      </n-space>
-    </n-form-item>
-    <n-form-item style="padding-top: 4px" label="Logo" path="shop_logo">
-      <n-input v-model:value="formValue.shop_logo" placeholder="Enter Logo" />
+    <!--    <n-form-item style="padding-top: 4px" label="Active" path="is_active">-->
+    <!--      <n-space>-->
+    <!--        <n-switch />-->
+    <!--      </n-space>-->
+    <!--    </n-form-item>-->
+    <n-form-item style="padding-top: 4px" label="Logo" path="logo">
+      <n-input v-model:value="formValue.logo" placeholder="Enter Logo" />
     </n-form-item>
     <n-space :vertical="true" style="align-items: center">
       <n-form-item>
@@ -37,7 +37,8 @@
 <script lang="ts" setup>
   import { ref } from 'vue';
   import { FormInst } from 'naive-ui';
-  import { getRoleApi, updateRoleApi } from '@/api/role/role';
+  import { getCompanyApi, updateCompanyApi } from '@/api/company/company';
+
   const formValue: any = ref({});
   const formRef = ref<FormInst | null>(null);
   const emits = defineEmits(['updated']);
@@ -47,9 +48,8 @@
     },
   });
   // fetch single Role  using id
-  getRoleApi(props.id).then((result) => {
+  getCompanyApi(props.id).then((result) => {
     formValue.value = result;
-    formValue.value.permissions = formValue.value.permissions.map((v: any) => v.id);
   });
 
   const rules = ref({
@@ -64,8 +64,8 @@
     e.preventDefault();
     formRef.value?.validate((errors) => {
       if (!errors) {
-        const { name, description, permissions } = formValue.value;
-        updateRoleApi(formValue.value.id, { name, description, permissions }).then((result) => {
+        // const { name, description, permissions } = formValue.value;
+        updateCompanyApi(formValue.value.id, { ...formValue.value }).then((result) => {
           window['$message'].success(result.message);
           emits('updated', result);
         });

@@ -11,23 +11,17 @@
       <n-table :striped="true">
         <thead>
           <tr>
-            <th>ID</th>
             <th>Name</th>
-            <th>Permissions</th>
+            <th>Phone</th>
             <th>Created At</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="item in list" :key="item.id">
-            <td>{{ item.id }}</td>
             <td>{{ item.company_name }}</td>
             <td>
-              <n-space>
-                <n-tag v-for="permission in item.permissions" :key="permission.id" type="success">{{
-                  permission?.name
-                }}</n-tag>
-              </n-space>
+              {{ item.phone }}
             </td>
             <td>{{ item.created_at }}</td>
             <td>
@@ -73,10 +67,10 @@
       </n-button>
       <n-modal v-model:show="showModal" preset="dialog">
         <template #header>
-          <div>Create New Role</div>
+          <div>Create New Company</div>
         </template>
         <n-space :vertical="true">
-          <add-role
+          <add-company
             @created="
               getList();
               showModal = false;
@@ -87,10 +81,10 @@
 
       <n-modal style="width: 70%" v-model:show="showEditModal" preset="dialog">
         <template #header>
-          <div>Update Role</div>
+          <div>Update Company</div>
         </template>
         <n-space :vertical="true">
-          <edit-role
+          <edit-company
             :id="selectedId"
             @updated="
               getList();
@@ -111,8 +105,8 @@
   import type { Component } from 'vue';
   import { NIcon, NPagination } from 'naive-ui';
   import { MoreOutlined, EditOutlined, DeleteOutlined, PlusOutlined } from '@vicons/antd';
-  import AddRole from '@/components/Role/AddRole.vue';
-  import EditRole from '@/components/Role/EditRole.vue';
+  import EditCompany from '@/components/company/EditCompany.vue';
+  import AddCompany from '@/components/company/AddCompany.vue';
 
   const dialog = useDialog();
   const selectedOption: any = ref(null);
