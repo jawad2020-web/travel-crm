@@ -104,7 +104,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { getRolesApi, deleteRoleApi } from '@/api/role/role';
+  import { getCompaniesApi, deleteCompanyApi } from '@/api/company/company';
   import { userPagination } from '@/hooks/userPagination';
   import { ref, onMounted, h } from 'vue';
   import { useDialog, useMessage } from 'naive-ui';
@@ -121,7 +121,7 @@
   const selectedId = ref();
   const message = useMessage();
   const { getList, list, page, pageSizes, itemCount, pageSize, params }: any =
-    userPagination(getRolesApi);
+    userPagination(getCompaniesApi);
 
   const renderIcon = (icon: Component) => {
     return () => {
@@ -157,7 +157,7 @@
   function deleteOperation() {
     const Loading = window['$loading'] || null;
     Loading.start();
-    deleteRoleApi(selectedId.value)
+    deleteCompanyApi(selectedId.value)
       .then((result) => {
         message.success(result.message);
         getList();
