@@ -56,19 +56,20 @@
           :show-size-picker="true"
         />
       </n-space>
-      <n-button
-        type="primary"
-        size="large"
-        :circle="true"
-        style="position: fixed; bottom: 30px; right: 40px"
-        @click="showModal = true"
-      >
-        <template #icon>
-          <n-icon>
-            <plus-outlined />
-          </n-icon>
-        </template>
-      </n-button>
+      <router-link to="/booking/add-booking">
+        <n-button
+          type="primary"
+          size="large"
+          :circle="true"
+          style="position: fixed; bottom: 30px; right: 40px"
+        >
+          <template #icon>
+            <n-icon>
+              <plus-outlined />
+            </n-icon>
+          </template>
+        </n-button>
+      </router-link>
       <n-modal v-model:show="showModal" preset="dialog">
         <template #header>
           <div>Create New Role</div>

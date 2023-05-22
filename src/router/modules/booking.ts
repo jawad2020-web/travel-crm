@@ -27,6 +27,15 @@ const routes: Array<RouteRecordRaw> = [
         },
         component: () => import('@/views/bookings/index.vue'),
       },
+      {
+        path: 'add-booking',
+        name: `add-${routeName}`,
+        meta: {
+          title: 'Add Booking',
+          permissions: ['can view add booking'],
+        },
+        component: () => import('@/views/bookings/addBooking.vue'),
+      },
     ],
   },
 ];
