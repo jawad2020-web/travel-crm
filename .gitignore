@@ -4,7 +4,7 @@ node_modules
 /dist
 dist.zip
 dist_electron
-
+yarn.lock
 # local env files
 .env.local
 .env.*.local
@@ -25,4 +25,3 @@ pnpm-debug.log*
 *.sw?
 /components.d.ts
 /components.d.ts
-yarn.lock
