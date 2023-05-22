@@ -1,7 +1,7 @@
 <template>
   <n-card>
     <n-form ref="formRef" :label-width="80" :model="formValue" :rules="rules" size="small">
-      <n-space style="display: block">
+      <n-space style="display: block" vertical>
         <n-card title="Booking Details" style="margin-bottom: 10px">
           <n-row gutter="12">
             <n-col :span="6">
@@ -62,28 +62,68 @@
             </n-col>
           </n-row>
         </n-card>
-        <n-card title="Visa Details" style="display: flex; width: 100%">
-          <n-grid :cols="24" style="width: 100%">
-            <n-gi :span="8">
+        <n-card title="Visa Details" style="display: flex; width: 100%; margin-bottom: 10px">
+          <n-row gutter="12">
+            <n-col :span="8">
               <n-form-item label="IATA" path="iata">
-                <n-input
-                  style="width: 100%"
-                  v-model:value="formValue.iata"
-                  placeholder="Enter iata"
-                />
+                <n-input v-model:value="formValue.iata" placeholder="Enter iata" />
               </n-form-item>
-            </n-gi>
-            <n-gi :span="8">
+            </n-col>
+            <n-col :span="8">
               <n-form-item label="Visa Company" path="visa_company">
                 <n-input v-model:value="formValue.visa_company" placeholder="Enter Visa Company" />
               </n-form-item>
-            </n-gi>
-            <n-gi :span="8">
+            </n-col>
+            <n-col :span="8">
               <n-form-item label="Visa Status" path="visa_status">
                 <n-input v-model:value="formValue.visa_status" placeholder="Enter Visa Status" />
               </n-form-item>
-            </n-gi>
-          </n-grid>
+            </n-col>
+          </n-row>
+        </n-card>
+        <n-card title="Hotel Details" style="display: flex; width: 100%">
+          <n-row gutter="12">
+            <n-col :span="12">
+              <n-form-item label="Room Type" path="room_type">
+                <n-input v-model:value="formValue.room_type" placeholder="Enter Room Type" />
+              </n-form-item>
+            </n-col>
+            <n-col :span="12">
+              <n-form-item label="Package" path="Package">
+                <n-input v-model:value="formValue.Package" placeholder="Enter Package" />
+              </n-form-item>
+            </n-col>
+            <n-col :span="18">
+              <n-form-item label="Hotel 1" path="hotel1">
+                <n-input v-model:value="formValue.hotel1" placeholder="Enter Hotel" />
+              </n-form-item>
+            </n-col>
+            <n-col :span="6">
+              <n-form-item label="Night 1" path="night1">
+                <n-input v-model:value="formValue.hotel1" placeholder="Enter Night" />
+              </n-form-item>
+            </n-col>
+            <n-col :span="18">
+              <n-form-item label="Hotel 2" path="hotel1">
+                <n-input v-model:value="formValue.hotel1" placeholder="Enter Hotel" />
+              </n-form-item>
+            </n-col>
+            <n-col :span="6">
+              <n-form-item label="Night 2" path="night1">
+                <n-input v-model:value="formValue.hotel1" placeholder="Enter Night" />
+              </n-form-item>
+            </n-col>
+            <n-col :span="18">
+              <n-form-item label="Hotel 3" path="hotel1">
+                <n-input v-model:value="formValue.hotel1" placeholder="Enter Hotel" />
+              </n-form-item>
+            </n-col>
+            <n-col :span="6">
+              <n-form-item label="Night 3" path="night1">
+                <n-input v-model:value="formValue.hotel1" placeholder="Enter Night" />
+              </n-form-item>
+            </n-col>
+          </n-row>
         </n-card>
       </n-space>
       <n-space :vertical="true" style="align-items: center">
