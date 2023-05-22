@@ -1,8 +1,8 @@
 <template>
   <n-card>
     <n-form ref="formRef" :label-width="80" :model="formValue" :rules="rules" size="small">
-      <n-space>
-        <n-card title="Booking Details">
+      <n-space style="display: block">
+        <n-card title="Booking Details" style="margin-bottom: 10px">
           <n-row gutter="12">
             <n-col :span="6">
               <n-form-item label="Customer Name" path="customer_name">
@@ -62,9 +62,9 @@
             </n-col>
           </n-row>
         </n-card>
-        <n-card title="Visa Details">
-          <n-grid :cols="24">
-            <n-gi :span="7">
+        <n-card title="Visa Details" style="display: flex; width: 100%">
+          <n-grid :cols="24" style="width: 100%">
+            <n-gi :span="8">
               <n-form-item label="IATA" path="iata">
                 <n-input
                   style="width: 100%"
@@ -73,7 +73,7 @@
                 />
               </n-form-item>
             </n-gi>
-            <n-gi :span="4">
+            <n-gi :span="8">
               <n-form-item label="Visa Company" path="visa_company">
                 <n-input v-model:value="formValue.visa_company" placeholder="Enter Visa Company" />
               </n-form-item>
