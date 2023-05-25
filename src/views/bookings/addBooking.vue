@@ -14,15 +14,21 @@
             </n-col>
             <n-col :span="6">
               <n-form-item label="Booking Status" path="booking_status">
-                <n-input
+                <n-select
                   v-model:value="formValue.booking_status"
-                  placeholder="Enter Booking Status"
+                  filterable
+                  placeholder="Search Status"
+                  :options="[
+                    { label: 'Draft', value: 'draft' },
+                    { label: 'Processing', value: 'processing' },
+                    { label: 'Final', value: 'Final' },
+                  ]"
                 />
               </n-form-item>
             </n-col>
             <n-col :span="6">
               <n-form-item label="Group No" path="group_no">
-                <n-input v-model:value="formValue.group_no" placeholder="Enter Group No" />
+                <n-input-number class="w-full" v-model:value="formValue.group_no" min="0" />
               </n-form-item>
             </n-col>
             <n-col :span="6">
@@ -32,7 +38,17 @@
             </n-col>
             <n-col :span="6">
               <n-form-item label="Category" path="category">
-                <n-input v-model:value="formValue.category" placeholder="Enter Category" />
+                <n-select
+                  v-model:value="formValue.category"
+                  filterable
+                  placeholder="Search Category"
+                  :options="[
+                    { label: 'Basic', value: 'basic' },
+                    { label: 'Individual', value: 'individual' },
+                    { label: 'Premium', value: 'premium' },
+                    { label: 'VIP', value: 'vip' },
+                  ]"
+                />
               </n-form-item>
             </n-col>
             <n-col :span="6">
@@ -66,17 +82,40 @@
           <n-row gutter="12">
             <n-col :span="8">
               <n-form-item label="IATA" path="iata">
-                <n-input v-model:value="formValue.iata" placeholder="Enter iata" />
+                <n-select
+                  v-model:value="formValue.visaDetails.iata"
+                  filterable
+                  placeholder="Select Option"
+                  :options="[
+                    { label: 'Basic', value: 'basic' },
+                    { label: 'Individual', value: 'individual' },
+                    { label: 'Premium', value: 'premium' },
+                    { label: 'VIP', value: 'vip' },
+                  ]"
+                />
               </n-form-item>
             </n-col>
             <n-col :span="8">
               <n-form-item label="Visa Company" path="visa_company">
-                <n-input v-model:value="formValue.visa_company" placeholder="Enter Visa Company" />
+                <n-input
+                  v-model:value="formValue.visaDetails.visa_company"
+                  placeholder="Enter Visa Company"
+                />
               </n-form-item>
             </n-col>
             <n-col :span="8">
               <n-form-item label="Visa Status" path="visa_status">
-                <n-input v-model:value="formValue.visa_status" placeholder="Enter Visa Status" />
+                <n-select
+                  v-model:value="formValue.visaDetails.visa_status"
+                  filterable
+                  placeholder="Select Option"
+                  :options="[
+                    { label: 'Basic', value: 'basic' },
+                    { label: 'Individual', value: 'individual' },
+                    { label: 'Premium', value: 'premium' },
+                    { label: 'VIP', value: 'vip' },
+                  ]"
+                />
               </n-form-item>
             </n-col>
           </n-row>
@@ -85,50 +124,116 @@
           <n-row gutter="12">
             <n-col :span="12">
               <n-form-item label="Room Type" path="room_type">
-                <n-input v-model:value="formValue.room_type" placeholder="Enter Room Type" />
+                <n-select
+                  v-model:value="formValue.hotelDetails.room_type"
+                  filterable
+                  placeholder="Select Option"
+                  :options="[
+                    { label: 'Double Bed', value: 'double bed' },
+                    { label: 'Quad Bed', value: 'quad bed' },
+                    { label: 'Quint Bed', value: 'quint bed' },
+                    { label: 'Sharing', value: 'sharing' },
+                    { label: 'Six Bed', value: 'six bed' },
+                    { label: 'Triple Bed', value: 'triple bed' },
+                  ]"
+                />
               </n-form-item>
             </n-col>
             <n-col :span="12">
               <n-form-item label="Package" path="Package">
-                <n-input v-model:value="formValue.Package" placeholder="Enter Package" />
+                <n-select
+                  v-model:value="formValue.hotelDetails.package"
+                  filterable
+                  placeholder="Select Option"
+                  :options="[
+                    { label: 'KPT-ONLY Accommodate', value: 'kpt only accommodate' },
+                    { label: 'Standard', value: 'standard' },
+                  ]"
+                />
               </n-form-item>
             </n-col>
             <n-col :span="18">
               <n-form-item label="Hotel 1" path="hotel1">
-                <n-input v-model:value="formValue.hotel1" placeholder="Enter Hotel" />
+                <n-select
+                  v-model:value="formValue.hotelDetails.hotel1"
+                  filterable
+                  placeholder="Select Option"
+                  :options="[
+                    { label: 'Double Bed', value: 'double bed' },
+                    { label: 'Quad Bed', value: 'quad bed' },
+                    { label: 'Quint Bed', value: 'quint bed' },
+                    { label: 'Sharing', value: 'sharing' },
+                    { label: 'Six Bed', value: 'six bed' },
+                    { label: 'Triple Bed', value: 'triple bed' },
+                  ]"
+                />
               </n-form-item>
             </n-col>
             <n-col :span="6">
               <n-form-item label="Night 1" path="night1">
-                <n-input v-model:value="formValue.hotel1" placeholder="Enter Night" />
+                <n-input-number
+                  class="w-full"
+                  v-model:value="formValue.hotelDetails.night1"
+                  min="0"
+                />
               </n-form-item>
             </n-col>
             <n-col :span="18">
               <n-form-item label="Hotel 2" path="hotel1">
-                <n-input v-model:value="formValue.hotel1" placeholder="Enter Hotel" />
+                <n-select
+                  v-model:value="formValue.hotelDetails.hotel2"
+                  filterable
+                  placeholder="Select Option"
+                  :options="[
+                    { label: 'Double Bed', value: 'double bed' },
+                    { label: 'Quad Bed', value: 'quad bed' },
+                    { label: 'Quint Bed', value: 'quint bed' },
+                    { label: 'Sharing', value: 'sharing' },
+                    { label: 'Six Bed', value: 'six bed' },
+                    { label: 'Triple Bed', value: 'triple bed' },
+                  ]"
+                />
               </n-form-item>
             </n-col>
             <n-col :span="6">
               <n-form-item label="Night 2" path="night1">
-                <n-input v-model:value="formValue.hotel1" placeholder="Enter Night" />
+                <n-input-number
+                  class="w-full"
+                  v-model:value="formValue.hotelDetails.night2"
+                  min="0"
+                />
               </n-form-item>
             </n-col>
             <n-col :span="18">
               <n-form-item label="Hotel 3" path="hotel1">
-                <n-input v-model:value="formValue.hotel1" placeholder="Enter Hotel" />
+                <n-select
+                  v-model:value="formValue.hotelDetails.hotel3"
+                  filterable
+                  placeholder="Select Option"
+                  :options="[
+                    { label: 'Double Bed', value: 'double bed' },
+                    { label: 'Quad Bed', value: 'quad bed' },
+                    { label: 'Quint Bed', value: 'quint bed' },
+                    { label: 'Sharing', value: 'sharing' },
+                    { label: 'Six Bed', value: 'six bed' },
+                    { label: 'Triple Bed', value: 'triple bed' },
+                  ]"
+                />
               </n-form-item>
             </n-col>
             <n-col :span="6">
               <n-form-item label="Night 3" path="night1">
-                <n-input v-model:value="formValue.hotel1" placeholder="Enter Night" />
+                <n-input-number
+                  class="w-full"
+                  v-model:value="formValue.hotelDetails.night3"
+                  min="0"
+                />
               </n-form-item>
-            </n-col>
-            <n-col :span="6">
-              <n-button @click="showMemberModal = true" type="success"> Add Member</n-button>
             </n-col>
           </n-row>
         </n-card>
         <n-card title="Members Details" class="flex w-full mb-1">
+          <n-button @click="showMemberModal = true" type="success"> Add Member</n-button>
           <n-row gutter="12">
             <n-table v-if="formValue.members.length" :striped="true">
               <thead>
@@ -180,9 +285,16 @@
           </n-row>
         </n-card>
       </n-space>
-      <n-space :vertical="true" style="align-items: center">
+      <n-space :vertical="true">
         <n-form-item>
-          <n-button style="alignment: center"> Create</n-button>
+          <n-button :loading="loading" type="success" @click="saveBooking">
+            <template #icon>
+              <n-icon>
+                <SaveArrowRight20Filled />
+              </n-icon>
+            </template>
+            Save Booking
+          </n-button>
         </n-form-item>
       </n-space>
     </n-form>
@@ -208,12 +320,20 @@
             </n-col>
             <n-col :span="5">
               <n-form-item label="Gender" path="gender">
-                <n-input v-model:value="bookingMember.gender" placeholder="Enter Gender" />
+                <n-select
+                  v-model:value="bookingMember.gender"
+                  filterable
+                  placeholder="Select Option"
+                  :options="[
+                    { label: 'Male', value: 'male' },
+                    { label: 'Female', value: 'female' },
+                  ]"
+                />
               </n-form-item>
             </n-col>
             <n-col :span="3">
               <n-form-item label="Family Head" path="family_head">
-                <n-switch v-model:value="bookingMember.family_member" />
+                <n-switch v-model:value="bookingMember.family_head" />
               </n-form-item>
             </n-col>
             <n-col :span="8">
@@ -223,20 +343,38 @@
             </n-col>
             <n-col :span="8">
               <n-form-item label="Marital Status" path="marital_status">
-                <n-input
+                <n-select
                   v-model:value="bookingMember.marital_status"
-                  placeholder="Enter Marital Status"
+                  filterable
+                  placeholder="Select Option"
+                  :options="[
+                    { label: 'Single', value: 'single' },
+                    { label: 'Married', value: 'married' },
+                    { label: 'Divorced', value: 'divorced' },
+                    { label: 'Widowed', value: 'widowed' },
+                  ]"
                 />
               </n-form-item>
             </n-col>
             <n-col :span="8">
               <n-form-item label="Title" path="marital_status">
-                <n-input v-model:value="bookingMember.title" placeholder="Enter Marital Status" />
+                <n-input v-model:value="bookingMember.title" placeholder="Enter Title" />
               </n-form-item>
             </n-col>
             <n-col :span="8">
               <n-form-item label="Education" path="education">
-                <n-input v-model:value="bookingMember.education" placeholder="Enter Education" />
+                <n-select
+                  v-model:value="bookingMember.education"
+                  filterable
+                  placeholder="Select Option"
+                  :options="[
+                    { label: 'Primary School', value: 'primary school' },
+                    { label: 'High School', value: 'high school' },
+                    { label: 'College Education', value: 'college education' },
+                    { label: 'Higher Education', value: 'higher education' },
+                    { label: 'No Education', value: 'no education' },
+                  ]"
+                />
               </n-form-item>
             </n-col>
             <n-col :span="8">
@@ -318,13 +456,17 @@
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import { SaveArrowRight20Filled, Delete20Filled, NotepadEdit20Filled } from '@vicons/fluent';
+  import { createBookingApi } from '@/api/booking/booking';
 
   const formValue: any = ref({
+    visaDetails: {},
+    hotelDetails: {},
     members: [],
   });
   const bookingMember: any = ref({});
   const showMemberModal = ref(false);
   const modelTitle = ref('Add Member');
+  const loading = ref(false);
   const rules = ref({
     company_name: {
       required: true,
@@ -347,5 +489,13 @@
     formValue.value.members.splice(index, 1);
     modelTitle.value = 'Update Member';
     showMemberModal.value = true;
+  }
+
+  function saveBooking() {
+    loading.value = true;
+    createBookingApi({ ...formValue.value }).then((result) => {
+      window['$message'].success(result.message);
+      loading.value = false;
+    });
   }
 </script>
