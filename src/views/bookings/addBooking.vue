@@ -56,6 +56,7 @@
                 <n-date-picker
                   style="width: 100%"
                   v-model:value="formValue.approval_date"
+                  value-format="yyyy-MM-dd HH:mm:ss"
                   type="datetime"
                   clearable
                 />
@@ -66,6 +67,7 @@
                 <n-date-picker
                   style="width: 100%"
                   v-model:value="formValue.expected_departure"
+                  value-format="yyyy-MM-dd HH:mm:ss"
                   type="datetime"
                   clearable
                 />
@@ -338,7 +340,12 @@
             </n-col>
             <n-col :span="8">
               <n-form-item label="DOB" path="dob">
-                <n-date-picker class="w-full" v-model:value="bookingMember.dob" type="date" />
+                <n-date-picker
+                  format="yyyy-MM-dd"
+                  class="w-full"
+                  v-model:value="bookingMember.dob"
+                  type="date"
+                />
               </n-form-item>
             </n-col>
             <n-col :span="8">
@@ -405,6 +412,7 @@
             <n-col :span="6">
               <n-form-item label="Issue Date" path="issue_date">
                 <n-date-picker
+                  value-format="yyyy-MM-dd"
                   class="w-full"
                   v-model:value="bookingMember.issue_date"
                   type="date"
@@ -414,6 +422,7 @@
             <n-col :span="6">
               <n-form-item label="Expiry Date" path="expiry_date">
                 <n-date-picker
+                  value-format="yyyy-MM-dd"
                   class="w-full"
                   v-model:value="bookingMember.expiry_date"
                   type="date"
@@ -493,6 +502,15 @@
 
   function saveBooking() {
     loading.value = true;
+    // formValue.value.members.map((member) => {
+    //   if (member.dob instanceof Date) {
+    //     member.dob = member.dob.toDateString().format('yyyy-M-dd');
+    //   } else if (typeof member.dob === 'number') {
+    //     const dateObj = new Date(member.dob);
+    //     member.dob = dateObj.toLocaleDateString();
+    //   }
+    //   return member;
+    // });
     createBookingApi({ ...formValue.value }).then((result) => {
       window['$message'].success(result.message);
       loading.value = false;
