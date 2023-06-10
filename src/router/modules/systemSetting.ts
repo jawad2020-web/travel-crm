@@ -1,7 +1,7 @@
 import { RouteRecordRaw } from 'vue-router';
 import { Layout } from '@/router/constant';
 import { SettingsOutline } from '@vicons/ionicons5';
-import { renderIcon } from '@/utils/index';
+import { renderIcon } from '@/utils';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -11,9 +11,9 @@ const routes: Array<RouteRecordRaw> = [
     component: Layout,
     meta: {
       title: 'System Settings',
-      permissions: ['can view system setting'],
+      permissions: ['can view system setting menu'],
       icon: renderIcon(SettingsOutline),
-      sort: 1,
+      sort: 10,
     },
     children: [
       {

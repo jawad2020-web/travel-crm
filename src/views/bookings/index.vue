@@ -58,6 +58,7 @@
       </n-space>
       <router-link to="/booking/add-booking">
         <n-button
+          v-if="permission.hasPermission(['can view add booking'])"
           type="primary"
           size="large"
           :circle="true"
@@ -112,6 +113,7 @@
   import { MoreOutlined, EditOutlined, DeleteOutlined, PlusOutlined } from '@vicons/antd';
   import AddRole from '@/components/Role/AddRole.vue';
   import EditRole from '@/components/Role/EditRole.vue';
+  import { usePermission } from '@/hooks/web/usePermission';
 
   const dialog = useDialog();
   const selectedOption: any = ref(null);
@@ -119,6 +121,7 @@
   const showEditModal = ref(false);
   const selectedId = ref();
   const message = useMessage();
+  const permission = usePermission();
   const { getList, list, page, pageSizes, itemCount, pageSize, params }: any =
     userPagination(getBookingsApi);
 

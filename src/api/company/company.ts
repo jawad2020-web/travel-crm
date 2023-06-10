@@ -15,12 +15,14 @@ export interface BasicPageParams {
 /**
  * @description: Get shop list
  */
-export function getCompaniesApi() {
+export function getCompaniesApi(params: any) {
   return http.request({
     url: '/company',
     method: 'get',
+    params,
   });
 }
+
 /**
  * @description: Get single shop
  */
@@ -46,6 +48,7 @@ export function createCompanyApi(params: any) {
     }
   );
 }
+
 /**
  * @description: update shop
  */
@@ -61,6 +64,7 @@ export function updateCompanyApi(companyId: any, params: any) {
     }
   );
 }
+
 /**
  * @description: delete shop
  */
