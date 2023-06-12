@@ -11,21 +11,17 @@
       <n-table :striped="true">
         <thead>
           <tr>
-            <th>ID</th>
             <th>Name</th>
-            <th>Permissions</th>
+            <th>Booking Status</th>
             <th>Created At</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="item in list" :key="item.id">
-            <td>{{ item.id }}</td>
-            <td>{{ item.name }}</td>
+            <td>{{ item.customer_name }}</td>
             <td>
-              <n-space>
-                {{ item.name }}
-              </n-space>
+              {{ item.booking_status }}
             </td>
             <td>{{ item.created_at }}</td>
             <td>
