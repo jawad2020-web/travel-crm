@@ -1,0 +1,1 @@
+import{X as o}from"./index.b77916f9.js";function r(e){return o.request({url:"/bookings",method:"get",params:e})}function n(e){return o.request({url:"/bookings",method:"POST",params:e},{isTransformResponse:!1})}function s(e){return o.request({url:`/bookings/${e}`,method:"DELETE"})}export{n as c,s as d,r as g};
