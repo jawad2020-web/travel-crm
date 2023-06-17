@@ -128,6 +128,11 @@
                   <n-input v-model:value="room.room_no" placeholder="Enter Room No" />
                 </n-form-item>
               </n-col>
+              <n-col :span="12">
+                <n-form-item label="Room No" path="room_no">
+                  <n-switch v-model:value="room.is_active" />
+                </n-form-item>
+              </n-col>
             </n-row>
             <n-row :gutter="10">
               <n-col :span="12">
@@ -217,6 +222,7 @@
       }
     });
   };
+
   const rules = ref({
     name: {
       required: true,

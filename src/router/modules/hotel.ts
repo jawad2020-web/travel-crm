@@ -47,6 +47,15 @@ const routes: Array<RouteRecordRaw> = [
         },
         component: () => import('@/components/hotels/EditHotel.vue'),
       },
+      {
+        path: 'room',
+        name: `${routeName}_room`,
+        meta: {
+          title: 'Rooms',
+          permissions: ['can view room'],
+        },
+        component: () => import('@/views/rooms/index.vue'),
+      },
     ],
   },
 ];
