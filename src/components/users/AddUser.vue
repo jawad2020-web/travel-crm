@@ -10,6 +10,7 @@
         placeholder="Select Option"
         :options="[
           { label: 'Company Admin', value: 'company admin' },
+          { label: 'Agent', value: 'agent' },
           { label: 'User', value: 'user' },
         ]"
       />

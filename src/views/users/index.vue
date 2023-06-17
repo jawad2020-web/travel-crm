@@ -25,9 +25,9 @@
             <td>{{ item.email }}</td>
             <td>
               <n-space>
-                <n-tag v-for="permission in item.permissions" :key="permission.id" type="success">{{
-                  permission?.name
-                }}</n-tag>
+                <n-tag v-for="permission in item.permissions" :key="permission.id" type="success"
+                  >{{ permission?.name }}
+                </n-tag>
               </n-space>
             </td>
             <td>{{ item.created_at }}</td>
@@ -75,7 +75,7 @@
       </n-button>
       <n-modal v-model:show="showModal" preset="dialog">
         <template #header>
-          <div>Create New Role</div>
+          <div>Create New User</div>
         </template>
         <n-space :vertical="true">
           <add-user
