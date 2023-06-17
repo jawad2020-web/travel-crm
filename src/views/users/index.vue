@@ -8,31 +8,38 @@
         @change="fetchList"
         placeholder="Search by Name"
       />
-      <n-table :striped="true">
+      <n-table :bordered="true" :single-line="false" size="small" :striped="true">
         <thead>
           <tr>
             <th>Name</th>
             <th>Email</th>
+            <th>Role</th>
             <th>Permissions</th>
-            <th>Created At</th>
             <th>Type</th>
+            <th>Created At</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in list" :key="item.id">
-            <td>{{ item.name }}</td>
+          <tr v-if="list.length === 0">
+            <td colspan="7" class="data_placeholder"> Record Not Exist </td>
+          </tr>
+          <tr v-else v-for="item in list" :key="item.id">
+            <td>{{ item.profile.first_name + ' ' + item.profile.last_name }}</td>
             <td>{{ item.email }}</td>
             <td>
-              <n-space>
-                <n-tag v-for="permission in item.permissions" :key="permission.id" type="success"
-                  >{{ permission?.name }}
-                </n-tag>
+              <n-space v-for="role in item.roles" :key="role.id">
+                {{ role?.name }}
               </n-space>
             </td>
-            <td>{{ item.created_at }}</td>
-            <td>{{ item.user_type }}</td>
             <td>
+              <n-space v-for="permission in item.permissions" :key="permission.id">
+                {{ permission?.name }}
+              </n-space>
+            </td>
+            <td>{{ item.user_type }}</td>
+            <td>{{ item.created_at }}</td>
+            <td v-if="item.user_type !== 'super admin'">
               <n-dropdown
                 @click="actionOperation(item)"
                 :onSelect="selectedAction"
@@ -73,7 +80,7 @@
           </n-icon>
         </template>
       </n-button>
-      <n-modal v-model:show="showModal" preset="dialog">
+      <n-modal style="width: 70%" v-model:show="showModal" preset="dialog">
         <template #header>
           <div>Create New User</div>
         </template>
@@ -89,7 +96,7 @@
 
       <n-modal style="width: 70%" v-model:show="showEditModal" preset="dialog">
         <template #header>
-          <div>Update Role</div>
+          <div>Update User</div>
         </template>
         <n-space :vertical="true">
           <edit-user
@@ -124,7 +131,6 @@
   const message = useMessage();
   const { getList, list, page, pageSizes, itemCount, pageSize, params }: any =
     userPagination(getUsersApi);
-  console.log('fetch users list ==>', list);
   const renderIcon = (icon: Component) => {
     return () => {
       return h(NIcon, null, {
@@ -195,3 +201,12 @@
     getList();
   });
 </script>
+<style lang="less" scoped>
+  .data_placeholder {
+    text-align: center;
+    color: gray;
+    padding: 20px 0;
+    font-size: 18px;
+    font-style: italic;
+  }
+</style>

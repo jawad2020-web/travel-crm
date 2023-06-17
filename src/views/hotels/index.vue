@@ -1,10 +1,5 @@
 <template>
   <n-card title="Hotels">
-    <template #header-extra>
-      <n-space>
-        <n-button type="success" @click="router.push({ name: 'hotel_add' })"> Add New </n-button>
-      </n-space>
-    </template>
     <n-space :vertical="true">
       <n-input
         type="text"
@@ -67,26 +62,68 @@
         :show-size-picker="true"
       />
     </n-space>
+    <n-button
+      type="primary"
+      size="large"
+      :circle="true"
+      style="position: fixed; bottom: 30px; right: 40px"
+      @click="showModal = true"
+      v-permission="{ action: ['can view add categories'] }"
+    >
+      <template #icon>
+        <n-icon>
+          <plus-outlined />
+        </n-icon>
+      </template>
+    </n-button>
+    <n-modal style="width: 70%" v-model:show="showModal" preset="dialog">
+      <template #header>
+        <div>Create New Hotel</div>
+      </template>
+      <n-space :vertical="true">
+        <add-hotel
+          @created="
+            getList();
+            showModal = false;
+          "
+        />
+      </n-space>
+    </n-modal>
+    <n-modal style="width: 70%" v-model:show="showEditModal" preset="dialog">
+      <template #header>
+        <div>Update Hotel</div>
+      </template>
+      <n-space :vertical="true">
+        <edit-hotel
+          :id="selectedId"
+          @updated="
+            getList();
+            showEditModal = false;
+          "
+        />
+      </n-space>
+    </n-modal>
   </n-card>
 </template>
 <script lang="ts" setup>
   import { getHotelsApi, deleteHotelApi } from '@/api/hotel/hotel';
-  import { useRouter } from 'vue-router';
   import { userPagination } from '@/hooks/userPagination';
   import { ref, onMounted, h } from 'vue';
   import { useDialog, useMessage } from 'naive-ui';
   import type { Component } from 'vue';
   import { NIcon, NPagination } from 'naive-ui';
-  import { MoreOutlined, EditOutlined, DeleteOutlined } from '@vicons/antd';
+  import { MoreOutlined, EditOutlined, DeleteOutlined, PlusOutlined } from '@vicons/antd';
+  import AddHotel from '@/components/hotels/AddHotel.vue';
+  import EditHotel from '@/components/hotels/EditHotel.vue';
 
-  const router = useRouter();
   const dialog = useDialog();
+  const showModal = ref(false);
+  const showEditModal = ref(false);
   const selectedOption: any = ref(null);
   const selectedId = ref();
   const message = useMessage();
   const { getList, list, page, pageSizes, itemCount, pageSize, params }: any =
     userPagination(getHotelsApi);
-  console.log('hotel list =>>', list);
   const renderIcon = (icon: Component) => {
     return () => {
       return h(NIcon, null, {
@@ -138,7 +175,8 @@
   }
   const actionOperation = (item: any) => {
     if (selectedOption.value === 'edit') {
-      router.push({ name: 'hotel_update', params: { id: item.id } });
+      showEditModal.value = true;
+      selectedId.value = item.id;
     } else if (selectedOption.value === 'delete') {
       selectedId.value = item.id;
       confirmationDialog();

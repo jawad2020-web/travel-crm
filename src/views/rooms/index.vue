@@ -1,5 +1,5 @@
 <template>
-  <n-card>
+  <n-card title="Rooms">
     <n-space :vertical="true">
       <n-input
         type="text"
@@ -85,7 +85,6 @@
           />
         </n-space>
       </n-modal>
-
       <n-modal style="width: 70%" v-model:show="showEditModal" preset="dialog">
         <template #header>
           <div>Update Category</div>
@@ -123,7 +122,6 @@
   const message = useMessage();
   const { getList, list, page, pageSizes, itemCount, pageSize, params }: any =
     userPagination(getRoomsApi);
-
   const renderIcon = (icon: Component) => {
     return () => {
       return h(NIcon, null, {

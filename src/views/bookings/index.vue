@@ -18,7 +18,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in list" :key="item.id">
+          <tr v-if="list.length === 0">
+            <td colspan="7" class="data_placeholder"> Record Not Exist </td>
+          </tr>
+          <tr v-else v-for="item in list" :key="item.id">
             <td>{{ item.customer_name }}</td>
             <td>
               {{ item.booking_status }}
@@ -120,7 +123,6 @@
   const permission = usePermission();
   const { getList, list, page, pageSizes, itemCount, pageSize, params }: any =
     userPagination(getBookingsApi);
-
   const renderIcon = (icon: Component) => {
     return () => {
       return h(NIcon, null, {
@@ -191,3 +193,12 @@
     getList();
   });
 </script>
+<style lang="less" scoped>
+  .data_placeholder {
+    text-align: center;
+    color: gray;
+    padding: 20px 0;
+    font-size: 18px;
+    font-style: italic;
+  }
+</style>

@@ -40,7 +40,6 @@ const transform: AxiosTransform = {
       isTransformResponse,
       isReturnNativeResponse,
     } = options;
-    console.log('AxiosResponse', res);
     // Whether to return the original response header For example: use this property when you need to get the response header
     if (isReturnNativeResponse) {
       return res;

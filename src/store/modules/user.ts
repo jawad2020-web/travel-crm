@@ -79,10 +79,8 @@ export const useUserStore = defineStore({
     // Get user information
     async getInfo() {
       const result = await getUserInfoApi();
-      console.log('user getinfo result ==>', result);
       if (result) {
         const permissionsList = this.allPermissions(result);
-        console.log('all permissions list ==>', permissionsList);
         this.setPermissions(permissionsList);
         this.setUserInfo(result);
       } else {

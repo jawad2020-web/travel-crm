@@ -2,6 +2,14 @@
   <n-form ref="formRef" :label-width="80" :model="rooms" :rules="rules" size="small">
     <n-row :gutter="10">
       <n-col :span="12">
+        <n-form-item label="Room No" path="hotel_id">
+          <single-hotel-selector
+            v-model:value="rooms.hotel_id"
+            label-field="name"
+            value-field="id"
+            :tag="false"
+          />
+        </n-form-item>
         <n-form-item label="Room No" path="room_no">
           <n-input v-model:value="rooms.room_no" placeholder="Enter Room No" />
         </n-form-item>

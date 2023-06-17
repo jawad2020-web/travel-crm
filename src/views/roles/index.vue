@@ -8,7 +8,7 @@
         @change="fetchList"
         placeholder="Search by Name"
       />
-      <n-table :striped="true">
+      <n-table :bordered="true" :single-line="false" size="small" :striped="true">
         <thead>
           <tr>
             <th>ID</th>
@@ -19,14 +19,15 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in list" :key="item.id">
+          <tr v-if="list.length === 0">
+            <td colspan="7" class="data_placeholder"> Record Not Exist </td>
+          </tr>
+          <tr v-else v-for="item in list" :key="item.id">
             <td>{{ item.id }}</td>
             <td>{{ item.name }}</td>
             <td>
-              <n-space>
-                <n-tag v-for="permission in item.permissions" :key="permission.id" type="success">{{
-                  permission?.name
-                }}</n-tag>
+              <n-space v-for="permission in item.permissions" :key="permission.id">
+                {{ permission?.name }}
               </n-space>
             </td>
             <td>{{ item.created_at }}</td>
@@ -122,7 +123,6 @@
   const message = useMessage();
   const { getList, list, page, pageSizes, itemCount, pageSize, params }: any =
     userPagination(getRolesApi);
-
   const renderIcon = (icon: Component) => {
     return () => {
       return h(NIcon, null, {
@@ -193,3 +193,12 @@
     getList();
   });
 </script>
+<style lang="less" scoped>
+  .data_placeholder {
+    text-align: center;
+    color: gray;
+    padding: 20px 0;
+    font-size: 18px;
+    font-style: italic;
+  }
+</style>
