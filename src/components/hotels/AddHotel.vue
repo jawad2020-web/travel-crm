@@ -5,30 +5,48 @@
         <n-col :span="24">
           <n-space :vertical="true">
             <n-card title="Hotel Inventory">
-              <n-form-item label="Hotel Name" path="name">
-                <n-input v-model:value="hotel.name" placeholder="Enter Name" />
-              </n-form-item>
-              <n-form-item label="Hotel Phone Number" path="phone_number">
-                <n-input v-model:value="hotel.phone_number" placeholder="Enter Phone Number" />
-              </n-form-item>
-              <n-form-item label="Hotel Owner" path="owner">
-                <n-input v-model:value="hotel.owner" placeholder="Enter Owner Name" />
-              </n-form-item>
-              <n-form-item label="Hotel Owner Phone" path="owner_phone">
-                <n-input v-model:value="hotel.owner_phone" placeholder="Enter Owner Phone" />
-              </n-form-item>
-              <n-form-item label="Hotel Address" path="address">
-                <n-input v-model:value="hotel.address" placeholder="Enter Address" />
-              </n-form-item>
-              <n-form-item label="Hotel City" path="city">
-                <n-input v-model:value="hotel.city" placeholder="Enter City" />
-              </n-form-item>
-              <n-form-item label="Hotel State" path="state">
-                <n-input v-model:value="hotel.state" placeholder="Enter State" />
-              </n-form-item>
-              <n-form-item label="Hotel Country" path="country">
-                <n-input v-model:value="hotel.country" placeholder="Enter Country" />
-              </n-form-item>
+              <n-row :gutter="10">
+                <n-col :span="12">
+                  <n-form-item label="Hotel Name" path="name">
+                    <n-input v-model:value="hotel.name" placeholder="Enter Name" />
+                  </n-form-item>
+                </n-col>
+                <n-col :span="12">
+                  <n-form-item label="Hotel Phone Number" path="phone_number">
+                    <n-input v-model:value="hotel.phone_number" placeholder="Enter Phone Number" />
+                  </n-form-item>
+                </n-col>
+                <n-col :span="12">
+                  <n-form-item label="Hotel Owner" path="owner">
+                    <n-input v-model:value="hotel.owner" placeholder="Enter Owner Name" />
+                  </n-form-item>
+                </n-col>
+                <n-col :span="12">
+                  <n-form-item label="Hotel Owner Phone" path="owner_phone">
+                    <n-input v-model:value="hotel.owner_phone" placeholder="Enter Owner Phone" />
+                  </n-form-item>
+                </n-col>
+                <n-col :span="12">
+                  <n-form-item label="Hotel Address" path="address">
+                    <n-input v-model:value="hotel.address" placeholder="Enter Address" />
+                  </n-form-item>
+                </n-col>
+                <n-col :span="12">
+                  <n-form-item label="Hotel City" path="city">
+                    <n-input v-model:value="hotel.city" placeholder="Enter City" />
+                  </n-form-item>
+                </n-col>
+                <n-col :span="12">
+                  <n-form-item label="Hotel State" path="state">
+                    <n-input v-model:value="hotel.state" placeholder="Enter State" />
+                  </n-form-item>
+                </n-col>
+                <n-col :span="12">
+                  <n-form-item label="Hotel Country" path="country">
+                    <n-input v-model:value="hotel.country" placeholder="Enter Country" />
+                  </n-form-item>
+                </n-col>
+              </n-row>
             </n-card>
             <n-card title="Room Inventory" class="flex w-full mb-1">
               <template #header-extra>
@@ -94,7 +112,7 @@
         </n-col>
         <n-space justify="end">
           <n-form-item :theme-overrides="{ labelHeightSmall: '0', feedbackHeightSmall: '0' }">
-            <n-button type="success" @click="handleValidateClick"> Update</n-button>
+            <n-button type="success" @click="handleValidateClick"> create</n-button>
           </n-form-item>
         </n-space>
       </n-row>
@@ -105,15 +123,6 @@
         <n-space :vertical="true">
           <n-card title="Inventory">
             <n-row :gutter="10">
-              <n-col :span="12">
-                <n-form-item label="Hotel" path="hotel_id">
-                  <single-attribute-selector
-                    v-model:value="room.hotel_id"
-                    label-field="name"
-                    value-field="id"
-                  />
-                </n-form-item>
-              </n-col>
               <n-col :span="12">
                 <n-form-item label="Room No" path="room_no">
                   <n-input v-model:value="room.room_no" placeholder="Enter Room No" />
