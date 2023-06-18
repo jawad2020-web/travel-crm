@@ -25,7 +25,8 @@
             <td colspan="7" class="data_placeholder"> Record Not Exist </td>
           </tr>
           <tr v-else v-for="item in list" :key="item.id">
-            <td>{{ item.profile.first_name + ' ' + item.profile.last_name }}</td>
+            <!-- <td>{{ item.profile.first_name + ' ' + item.profile.last_name }}</td> -->
+            <td>{{ item?.profile?.first_name + ' ' + item?.profile?.last_name }}</td>
             <td>{{ item.email }}</td>
             <td>
               <n-space v-for="role in item.roles" :key="role.id">
@@ -131,6 +132,7 @@
   const message = useMessage();
   const { getList, list, page, pageSizes, itemCount, pageSize, params }: any =
     userPagination(getUsersApi);
+  console.log('user list =>', list);
   const renderIcon = (icon: Component) => {
     return () => {
       return h(NIcon, null, {

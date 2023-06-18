@@ -72,7 +72,7 @@
           </n-icon>
         </template>
       </n-button>
-      <n-modal style="width: 70%" v-model:show="showModal" preset="dialog">
+      <n-modal style="width: 40%" v-model:show="showModal" preset="dialog">
         <template #header>
           <div>Create New Role</div>
         </template>
@@ -86,7 +86,7 @@
         </n-space>
       </n-modal>
 
-      <n-modal style="width: 70%" v-model:show="showEditModal" preset="dialog">
+      <n-modal style="width: 40%" v-model:show="showEditModal" preset="dialog">
         <template #header>
           <div>Update Role</div>
         </template>

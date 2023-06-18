@@ -17,6 +17,9 @@
             <th>Price Type</th>
             <th>Purchase Price</th>
             <th>Sale Price</th>
+            <th>Status</th>
+            <th>Created At</th>
+            <th>Updated At</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -31,7 +34,9 @@
             <td>{{ item.price_type }}</td>
             <td>{{ item.purchase_price }}</td>
             <td>{{ item.sale_price }}</td>
+            <td>{{ item.is_active == '1' ? 'active' : 'Not active' }}</td>
             <td>{{ item.created_at }}</td>
+            <td>{{ item.updated_at }}</td>
             <td>
               <n-dropdown
                 @click="actionOperation(item)"
@@ -74,7 +79,7 @@
       </n-button>
       <n-modal style="width: 70%" v-model:show="showModal" preset="dialog">
         <template #header>
-          <div>Create New Category</div>
+          <div>Create New Room</div>
         </template>
         <n-space :vertical="true">
           <add-room
@@ -87,7 +92,7 @@
       </n-modal>
       <n-modal style="width: 70%" v-model:show="showEditModal" preset="dialog">
         <template #header>
-          <div>Update Category</div>
+          <div>Update Room</div>
         </template>
         <n-space :vertical="true">
           <edit-room

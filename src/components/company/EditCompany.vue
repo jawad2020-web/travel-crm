@@ -1,38 +1,38 @@
 <template>
   <n-form ref="formRef" :label-width="80" :model="formValue" :rules="rules" size="small">
-    <n-row :gutter="5">
+    <n-row :gutter="10">
       <n-col :span="12">
-        <n-form-item style="padding-top: 24px" label="Name" path="company_name">
+        <n-form-item label="Name" path="company_name">
           <n-input v-model:value="formValue.company_name" placeholder="Enter Name" />
         </n-form-item>
       </n-col>
       <n-col :span="12">
-        <n-form-item style="padding-top: 4px" label="Phone" path="phone">
+        <n-form-item label="Phone" path="phone">
           <n-input v-model:value="formValue.phone" placeholder="Enter Phone" />
         </n-form-item>
       </n-col>
       <n-col :span="12">
-        <n-form-item style="padding-top: 4px" label="Address" path="address">
+        <n-form-item label="Address" path="address">
           <n-input v-model:value="formValue.address" placeholder="Enter Address" />
         </n-form-item>
       </n-col>
       <n-col :span="12">
-        <n-form-item style="padding-top: 4px" label="City" path="city">
+        <n-form-item label="City" path="city">
           <n-input v-model:value="formValue.city" placeholder="Enter City" />
         </n-form-item>
       </n-col>
       <n-col :span="12">
-        <n-form-item style="padding-top: 4px" label="State" path="state">
+        <n-form-item label="State" path="state">
           <n-input v-model:value="formValue.state" placeholder="Enter State" />
         </n-form-item>
       </n-col>
       <n-col :span="12">
-        <n-form-item style="padding-top: 4px" label="Country" path="country">
+        <n-form-item label="Country" path="country">
           <n-input v-model:value="formValue.country" placeholder="Enter Country" />
         </n-form-item>
       </n-col>
       <n-col :span="12">
-        <n-form-item style="padding-top: 4px" label="Logo" path="logo">
+        <n-form-item label="Logo" path="logo">
           <n-input v-model:value="formValue.logo" placeholder="Enter Logo" />
         </n-form-item>
       </n-col>
@@ -43,6 +43,7 @@
           feedbackHeightSmall: '0',
           feedbackHeightMedium: '0',
           labelHeightMedium: '0',
+          labelHeightSmall: '0',
         }"
       >
         <n-button type="success" @click="handleValidateClick"> Update</n-button>

@@ -1,9 +1,29 @@
 <template>
   <n-form ref="formRef" :label-width="80" :model="formValue" :rules="rules" size="small">
-    <n-row :gutter="5">
+    <n-row :gutter="10">
       <n-col :span="12">
-        <n-form-item style="padding-top: 24px" label="Email" path="email">
+        <n-form-item label="First Name" path="first_name">
+          <n-input v-model:value="formValue.profile.first_name" placeholder="Enter Name" />
+        </n-form-item>
+      </n-col>
+      <n-col :span="12">
+        <n-form-item label="Last Name" path="last_name">
+          <n-input v-model:value="formValue.profile.last_name" placeholder="Enter Name" />
+        </n-form-item>
+      </n-col>
+      <n-col :span="12">
+        <n-form-item label="Email" path="email">
           <n-input v-model:value="formValue.email" placeholder="Enter email" />
+        </n-form-item>
+      </n-col>
+      <n-col :span="12">
+        <n-form-item label="Roles" path="roles">
+          <role-selector
+            v-model:value="formValue.roles"
+            label-field="name"
+            value-field="id"
+            :tag="true"
+          />
         </n-form-item>
       </n-col>
       <n-col :span="12">
@@ -34,34 +54,6 @@
           />
         </n-form-item>
       </n-col>
-      <n-col :span="12">
-        <n-form-item style="padding-top: 24px" label="Roles" path="roles">
-          <role-selector
-            v-model:value="formValue.roles"
-            label-field="name"
-            value-field="id"
-            :tag="true"
-          />
-        </n-form-item>
-      </n-col>
-      <n-col :span="12">
-        <n-form-item style="padding-top: 24px" label="Password" path="password">
-          <n-input
-            type="password"
-            v-model:value="formValue.password"
-            placeholder="Enter password"
-          />
-        </n-form-item>
-      </n-col>
-      <n-col :span="12">
-        <n-form-item style="padding-top: 24px" label="Confirm Password" path="confirmPassword">
-          <n-input
-            type="password"
-            v-model:value="formValue.confirmPassword"
-            placeholder="Enter confirm password"
-          />
-        </n-form-item>
-      </n-col>
     </n-row>
     <n-space justify="end" :wrap="true" :size="0">
       <n-form-item
@@ -82,7 +74,9 @@
   import { FormInst } from 'naive-ui';
   import { getUserApi, updateUserApi } from '@/api/user/user';
   const formRef = ref<FormInst | null>(null);
-  const formValue: any = ref({});
+  const formValue: any = ref({
+    profile: {},
+  });
   const emits = defineEmits(['updated']);
   const props = defineProps({
     id: {
@@ -90,9 +84,11 @@
     },
   });
   // fetch single Role  using id
-  getUserApi(props.id).then((result) => {
+  getUserApi(props.id).then((result: any) => {
+    console.log('fetch user', result);
     formValue.value = result;
     formValue.value.permissions = formValue.value.permissions.map((v: any) => v.id);
+    formValue.value.roles = formValue.value.roles.map((v: any) => v.id);
   });
 
   const handleValidateClick = (e: MouseEvent) => {
