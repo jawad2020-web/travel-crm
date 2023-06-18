@@ -260,7 +260,7 @@
       };
       const avatarOptions = [
         {
-          label: 'Profile Setting',
+          label: 'Profile',
           key: 1,
         },
         {
@@ -273,7 +273,7 @@
       const avatarSelect = (key: any) => {
         switch (key) {
           case 1:
-            router.push({ name: 'Setting' });
+            router.push({ name: 'system_profile' });
             break;
           case 2:
             doLogout();

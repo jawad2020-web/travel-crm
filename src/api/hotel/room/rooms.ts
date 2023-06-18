@@ -25,7 +25,7 @@ export function getRoomsApi(params: any) {
 /**
  * @description: Get single room
  */
-export function getRoomApi(id: any) {
+export function getRoomApi(id: number | undefined) {
   return http.request({
     url: `/rooms/${id}`,
     method: 'get',
@@ -50,7 +50,7 @@ export function createRoomApi(params: any) {
 /**
  * @description: update room
  */
-export function updateRoomApi(id: any, params: any) {
+export function updateRoomApi(id: number, params: any) {
   return http.request<BasicResponseModel>(
     {
       url: `/rooms/${id}`,
@@ -65,7 +65,7 @@ export function updateRoomApi(id: any, params: any) {
 /**
  * @description: delete room
  */
-export function deleteRoomApi(id: any) {
+export function deleteRoomApi(id: number) {
   return http.request<BasicResponseModel>({
     url: `/hotels/${id}`,
     method: 'DELETE',

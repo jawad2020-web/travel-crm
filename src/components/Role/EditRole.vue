@@ -3,7 +3,7 @@
     <n-form-item style="padding-top: 24px" label="Name" path="name">
       <n-input v-model:value="formValue.name" placeholder="Edit Name" />
     </n-form-item>
-    <n-form-item style="padding-top: 24px" label="Permissions" path="permissions">
+    <n-form-item label="Permissions" path="permissions">
       <permission-selector
         v-model:value="formValue.permissions"
         label-field="name"
@@ -11,9 +11,15 @@
         :tag="true"
       />
     </n-form-item>
-    <n-space :vertical="true" style="align-items: center">
-      <n-form-item>
-        <n-button style="alignment: center" @click="handleValidateClick"> Save</n-button>
+    <n-space justify="end" :wrap="true" :size="0">
+      <n-form-item
+        :theme-overrides="{
+          feedbackHeightSmall: '0',
+          feedbackHeightMedium: '0',
+          labelHeightMedium: '0',
+        }"
+      >
+        <n-button type="success" @click="handleValidateClick"> Update</n-button>
       </n-form-item>
     </n-space>
   </n-form>
@@ -23,8 +29,8 @@
   import { ref } from 'vue';
   import { FormInst } from 'naive-ui';
   import { getRoleApi, updateRoleApi } from '@/api/role/role';
-  const formValue: any = ref({});
   const formRef = ref<FormInst | null>(null);
+  const formValue: any = ref({});
   const emits = defineEmits(['updated']);
   const props = defineProps({
     id: {
@@ -37,20 +43,11 @@
     formValue.value.permissions = formValue.value.permissions.map((v: any) => v.id);
   });
 
-  const rules = ref({
-    name: {
-      required: true,
-      message: 'Please Enter Name',
-      trigger: 'blur',
-    },
-  });
-
   const handleValidateClick = (e: MouseEvent) => {
     e.preventDefault();
     formRef.value?.validate((errors) => {
       if (!errors) {
-        const { name, permissions } = formValue.value;
-        updateRoleApi(formValue.value.id, { name, permissions }).then((result) => {
+        updateRoleApi(formValue.value.id, formValue.value).then((result: any) => {
           window['$message'].success(result.message);
           emits('updated', result);
         });
@@ -60,6 +57,13 @@
       }
     });
   };
+  const rules = ref({
+    name: {
+      required: true,
+      message: 'Please Enter Name',
+      trigger: 'blur',
+    },
+  });
 </script>
 
 <style lang="less" scoped></style>

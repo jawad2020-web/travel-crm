@@ -26,9 +26,15 @@
     <n-form-item style="padding-top: 4px" label="Logo" path="logo">
       <n-input v-model:value="formValue.logo" placeholder="Enter Logo" />
     </n-form-item>
-    <n-space :vertical="true" style="align-items: center">
-      <n-form-item>
-        <n-button style="alignment: center" @click="handleValidateClick"> Create</n-button>
+    <n-space justify="end" :wrap="true" :size="0">
+      <n-form-item
+        :theme-overrides="{
+          feedbackHeightSmall: '0',
+          feedbackHeightMedium: '0',
+          labelHeightMedium: '0',
+        }"
+      >
+        <n-button type="success" @click="handleValidateClick"> Create</n-button>
       </n-form-item>
     </n-space>
   </n-form>

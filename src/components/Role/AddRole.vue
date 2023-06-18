@@ -3,7 +3,7 @@
     <n-form-item style="padding-top: 24px" label="Name" path="name">
       <n-input v-model:value="formValue.name" placeholder="Enter Name" />
     </n-form-item>
-    <n-form-item style="padding-top: 24px" label="Permissions" path="permissions">
+    <n-form-item label="Permissions" path="permissions">
       <permission-selector
         v-model:value="formValue.permissions"
         label-field="name"
@@ -11,9 +11,15 @@
         :tag="true"
       />
     </n-form-item>
-    <n-space :vertical="true" style="align-items: center">
-      <n-form-item>
-        <n-button style="alignment: center" @click="handleValidateClick"> Create</n-button>
+    <n-space justify="end" :wrap="true" :size="0">
+      <n-form-item
+        :theme-overrides="{
+          feedbackHeightSmall: '0',
+          feedbackHeightMedium: '0',
+          labelHeightMedium: '0',
+        }"
+      >
+        <n-button type="success" @click="handleValidateClick"> Create</n-button>
       </n-form-item>
     </n-space>
   </n-form>
@@ -27,20 +33,12 @@
   const formValue: any = ref({});
   const formRef = ref<FormInst | null>(null);
   const emits = defineEmits(['created']);
-  const rules = ref({
-    name: {
-      required: true,
-      message: 'Please Enter Name',
-      trigger: 'blur',
-    },
-  });
 
   const handleValidateClick = (e: MouseEvent) => {
     e.preventDefault();
     formRef.value?.validate((errors) => {
       if (!errors) {
-        const { name, permissions } = formValue.value;
-        createRoleApi({ name, permissions }).then((result) => {
+        createRoleApi(formValue.value).then((result) => {
           window['$message'].success(result.message);
           emits('created', result.result);
         });
@@ -50,6 +48,13 @@
       }
     });
   };
+  const rules = ref({
+    name: {
+      required: true,
+      message: 'Please Enter Name',
+      trigger: 'blur',
+    },
+  });
 </script>
 
 <style lang="less" scoped></style>

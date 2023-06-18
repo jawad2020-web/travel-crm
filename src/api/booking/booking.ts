@@ -13,7 +13,7 @@ export interface BasicPageParams {
 }
 
 /**
- * @description: Get role list
+ * @description: Get booking list
  */
 export function getBookingsApi(params: any) {
   return http.request({
@@ -23,9 +23,9 @@ export function getBookingsApi(params: any) {
   });
 }
 /**
- * @description: Get single role
+ * @description: Get single booking
  */
-export function getBookingApi(id: any) {
+export function getBookingApi(id: number | undefined) {
   return http.request({
     url: `/bookings/${id}`,
     method: 'get',
@@ -33,7 +33,7 @@ export function getBookingApi(id: any) {
 }
 
 /**
- * @description: create new role
+ * @description: create new booking
  */
 export function createBookingApi(params: any) {
   return http.request<BasicResponseModel>(
@@ -48,12 +48,12 @@ export function createBookingApi(params: any) {
   );
 }
 /**
- * @description: update role
+ * @description: update booking
  */
-export function updateBookingApi(bookingId: any, params: any) {
+export function updateBookingApi(id: number, params: any) {
   return http.request<BasicResponseModel>(
     {
-      url: `/bookings/${bookingId}`,
+      url: `/bookings/${id}`,
       method: 'PUT',
       params,
     },
@@ -63,11 +63,11 @@ export function updateBookingApi(bookingId: any, params: any) {
   );
 }
 /**
- * @description: delete role
+ * @description: delete booking
  */
-export function deleteBookingApi(bookingId: any) {
+export function deleteBookingApi(id: number) {
   return http.request<BasicResponseModel>({
-    url: `/bookings/${bookingId}`,
+    url: `/bookings/${id}`,
     method: 'DELETE',
   });
 }

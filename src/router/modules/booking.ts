@@ -15,7 +15,7 @@ const routes: Array<RouteRecordRaw> = [
       title: 'Bookings',
       icon: renderIcon(ShopOutlined),
       permissions: ['can view bookings menu'],
-      sort: 2,
+      sort: 4,
     },
     children: [
       {

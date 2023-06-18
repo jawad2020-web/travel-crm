@@ -28,7 +28,7 @@
     props: {
       mode: {
         // menu mode
-        type: String,
+        type: String as PropType<'vertical' | 'horizontal' | undefined>,
         default: 'vertical',
       },
       collapsed: {

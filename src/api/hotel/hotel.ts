@@ -25,7 +25,7 @@ export function getHotelsApi(params: any) {
 /**
  * @description: Get single hotel
  */
-export function getHotelApi(id: any) {
+export function getHotelApi(id: number | undefined) {
   return http.request({
     url: `/hotels/${id}`,
     method: 'get',
@@ -50,7 +50,7 @@ export function createHotelApi(params: any) {
 /**
  * @description: update hotel
  */
-export function updateHotelApi(id: any, params: any) {
+export function updateHotelApi(id: number, params: any) {
   return http.request<BasicResponseModel>(
     {
       url: `/hotels/${id}`,
@@ -65,7 +65,7 @@ export function updateHotelApi(id: any, params: any) {
 /**
  * @description: delete hotel
  */
-export function deleteHotelApi(id: any) {
+export function deleteHotelApi(id: number) {
   return http.request<BasicResponseModel>({
     url: `/hotels/${id}`,
     method: 'DELETE',

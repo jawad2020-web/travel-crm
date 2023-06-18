@@ -13,7 +13,7 @@ export interface BasicPageParams {
 }
 
 /**
- * @description: Get shop list
+ * @description: Get companies list
  */
 export function getCompaniesApi(params: any) {
   return http.request({
@@ -24,17 +24,17 @@ export function getCompaniesApi(params: any) {
 }
 
 /**
- * @description: Get single shop
+ * @description: Get single company
  */
-export function getCompanyApi(companyId: any) {
+export function getCompanyApi(id: number | undefined) {
   return http.request({
-    url: `/company/${companyId}`,
+    url: `/company/${id}`,
     method: 'get',
   });
 }
 
 /**
- * @description: create new shop
+ * @description: create new company
  */
 export function createCompanyApi(params: any) {
   return http.request<BasicResponseModel>(
@@ -50,12 +50,12 @@ export function createCompanyApi(params: any) {
 }
 
 /**
- * @description: update shop
+ * @description: update company
  */
-export function updateCompanyApi(companyId: any, params: any) {
+export function updateCompanyApi(id: number, params: any) {
   return http.request<BasicResponseModel>(
     {
-      url: `/company/${companyId}`,
+      url: `/company/${id}`,
       method: 'PUT',
       params,
     },
@@ -66,11 +66,11 @@ export function updateCompanyApi(companyId: any, params: any) {
 }
 
 /**
- * @description: delete shop
+ * @description: delete company
  */
-export function deleteCompanyApi(companyId: any) {
+export function deleteCompanyApi(id: number) {
   return http.request<BasicResponseModel>({
-    url: `/company/${companyId}`,
+    url: `/company/${id}`,
     method: 'DELETE',
   });
 }

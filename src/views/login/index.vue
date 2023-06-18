@@ -2,13 +2,10 @@
   <div class="view-account">
     <div class="view-account-header"></div>
     <div class="view-account-container">
-      <!-- <div class="view-account-top"> -->
       <div class="view-account-top-logo">
         <!-- <img :src="websiteConfig.loginImage" alt="" /> -->
         <n-h1>InSync CRM</n-h1>
       </div>
-      <!-- <div class="view-account-top-desc">{{ websiteConfig.loginDesc }}</div> -->
-      <!-- </div> -->
       <div class="view-account-form">
         <n-form
           ref="formRef"
@@ -40,45 +37,11 @@
               </template>
             </n-input>
           </n-form-item>
-          <!-- <n-form-item class="default-color">
-            <div class="flex justify-between">
-              <div class="flex-initial">
-                <n-checkbox v-model:checked="autoLogin">自动登录</n-checkbox>
-              </div>
-              <div class="flex-initial order-last">
-                <a href="javascript:">忘记密码</a>
-              </div>
-            </div>
-          </n-form-item> -->
           <n-form-item>
             <n-button type="primary" @click="handleSubmit" size="large" :loading="loading" block>
               Login
             </n-button>
           </n-form-item>
-          <!-- <n-form-item class="default-color">
-            <div class="flex view-account-other">
-              <div class="flex-initial">
-                <span>其它登录方式</span>
-              </div>
-              <div class="flex-initial mx-2">
-                <a href="javascript:">
-                  <n-icon size="24" color="#2d8cf0">
-                    <LogoGithub />
-                  </n-icon>
-                </a>
-              </div>
-              <div class="flex-initial mx-2">
-                <a href="javascript:">
-                  <n-icon size="24" color="#2d8cf0">
-                    <LogoFacebook />
-                  </n-icon>
-                </a>
-              </div>
-              <div class="flex-initial" style="margin-left: auto">
-                <a href="javascript:">注册账号</a>
-              </div>
-            </div>
-          </n-form-item> -->
         </n-form>
       </div>
     </div>
@@ -112,7 +75,7 @@
   });
 
   const rules = {
-    email: { required: true, message: 'Please Enter User Name', trigger: 'blur' },
+    email: { required: true, message: 'Please Enter User Email', trigger: 'blur' },
     password: { required: true, message: 'Please Enter Password', trigger: 'blur' },
   };
 
@@ -164,13 +127,20 @@
     overflow: auto;
 
     &-container {
-      flex: 1;
-      padding: 32px 12px;
-      max-width: 384px;
-      min-width: 320px;
-      margin: 0 auto;
+      // flex: 1;
+      // padding: 32px 12px;
+      // max-width: 384px;
+      // min-width: 320px;
+      // margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
     }
-
+    &-form {
+      width: 30%;
+    }
     &-top {
       padding: 32px 0;
       text-align: center;

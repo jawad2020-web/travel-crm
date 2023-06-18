@@ -1,24 +1,26 @@
 import { RouteRecordRaw } from 'vue-router';
 import { Layout } from '@/router/constant';
 import { SettingsOutline } from '@vicons/ionicons5';
-import { renderIcon } from '@/utils';
+import { renderIcon } from '@/utils/index';
+
+const routeName = 'system';
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/system',
-    name: 'System',
+    name: routeName,
     redirect: '/system/menu',
     component: Layout,
     meta: {
       title: 'System Settings',
-      permissions: ['can view system setting menu'],
+      permissions: ['can view system setting'],
       icon: renderIcon(SettingsOutline),
-      sort: 10,
+      sort: 1,
     },
     children: [
       {
         path: 'user',
-        name: 'system_user',
+        name: `${routeName}_user`,
         meta: {
           title: 'Users',
           permissions: ['can view users'],
@@ -26,8 +28,18 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/users/index.vue'),
       },
       {
+        path: 'profile',
+        name: `${routeName}_profile`,
+        meta: {
+          title: 'Profile',
+          permissions: ['can view Profile'],
+          hidden: true,
+        },
+        component: () => import('@/views/users/Profile.vue'),
+      },
+      {
         path: 'role',
-        name: 'system_role',
+        name: `${routeName}_role`,
         meta: {
           title: 'Roles',
           permissions: ['can view roles'],
@@ -36,7 +48,7 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: 'permission',
-        name: 'system_permission',
+        name: `${routeName}_permission`,
         meta: {
           title: 'Permissions',
           permissions: ['can view permissions'],

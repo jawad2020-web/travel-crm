@@ -26,7 +26,7 @@ export function getPermissionsApi(params: any) {
 /**
  * @description: Get single permission
  */
-export function getPermissionApi(id: any) {
+export function getPermissionApi(id: number | undefined) {
   return http.request({
     url: `/permissions/${id}`,
     method: 'get',
@@ -51,7 +51,7 @@ export function createPermissionApi(params: any) {
 /**
  * @description: update permission
  */
-export function updatePermissionApi(id: any, params: any) {
+export function updatePermissionApi(id: number, params: any) {
   console.log('api file response', id);
   return http.request<BasicResponseModel>(
     {
@@ -67,7 +67,7 @@ export function updatePermissionApi(id: any, params: any) {
 /**
  * @description: delete permission
  */
-export function deletePermissionApi(id: any) {
+export function deletePermissionApi(id: number) {
   return http.request<BasicResponseModel>({
     url: `/permissions/${id}`,
     method: 'DELETE',

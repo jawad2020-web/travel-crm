@@ -1,19 +1,77 @@
 <template>
   <n-form ref="formRef" :label-width="80" :model="formValue" :rules="rules" size="small">
-    <n-form-item style="padding-top: 24px" label="Name" path="name">
-      <n-input v-model:value="formValue.name" placeholder="Edit Name" />
-    </n-form-item>
-    <n-form-item style="padding-top: 24px" label="Permissions" path="permissions">
-      <permission-selector
-        v-model:value="formValue.permissions"
-        label-field="name"
-        value-field="id"
-        :tag="true"
-      />
-    </n-form-item>
-    <n-space :vertical="true" style="align-items: center">
-      <n-form-item>
-        <n-button style="alignment: center" @click="handleValidateClick"> Save</n-button>
+    <n-row :gutter="5">
+      <n-col :span="12">
+        <n-form-item style="padding-top: 24px" label="Email" path="email">
+          <n-input v-model:value="formValue.email" placeholder="Enter email" />
+        </n-form-item>
+      </n-col>
+      <n-col :span="12">
+        <n-form-item label="User Type" path="user_type">
+          <n-select
+            v-model:value="formValue.user_type"
+            filterable
+            placeholder="Select Option"
+            :options="[
+              { label: 'Company Admin', value: 'company admin' },
+              { label: 'Agent', value: 'agent' },
+              { label: 'User', value: 'user' },
+            ]"
+          />
+        </n-form-item>
+      </n-col>
+      <n-col :span="12">
+        <n-form-item
+          v-if="formValue.user_type === 'company admin'"
+          label="Company"
+          path="company_id"
+        >
+          <company-selector
+            v-model:value="formValue.company_id"
+            label-field="company_name"
+            value-field="id"
+            :tag="false"
+          />
+        </n-form-item>
+      </n-col>
+      <n-col :span="12">
+        <n-form-item style="padding-top: 24px" label="Roles" path="roles">
+          <role-selector
+            v-model:value="formValue.roles"
+            label-field="name"
+            value-field="id"
+            :tag="true"
+          />
+        </n-form-item>
+      </n-col>
+      <n-col :span="12">
+        <n-form-item style="padding-top: 24px" label="Password" path="password">
+          <n-input
+            type="password"
+            v-model:value="formValue.password"
+            placeholder="Enter password"
+          />
+        </n-form-item>
+      </n-col>
+      <n-col :span="12">
+        <n-form-item style="padding-top: 24px" label="Confirm Password" path="confirmPassword">
+          <n-input
+            type="password"
+            v-model:value="formValue.confirmPassword"
+            placeholder="Enter confirm password"
+          />
+        </n-form-item>
+      </n-col>
+    </n-row>
+    <n-space justify="end" :wrap="true" :size="0">
+      <n-form-item
+        :theme-overrides="{
+          feedbackHeightSmall: '0',
+          feedbackHeightMedium: '0',
+          labelHeightMedium: '0',
+        }"
+      >
+        <n-button type="success" @click="handleValidateClick"> Update</n-button>
       </n-form-item>
     </n-space>
   </n-form>
@@ -22,9 +80,9 @@
 <script lang="ts" setup>
   import { ref } from 'vue';
   import { FormInst } from 'naive-ui';
-  import { getRoleApi, updateRoleApi } from '@/api/role/role';
-  const formValue: any = ref({});
+  import { getUserApi, updateUserApi } from '@/api/user/user';
   const formRef = ref<FormInst | null>(null);
+  const formValue: any = ref({});
   const emits = defineEmits(['updated']);
   const props = defineProps({
     id: {
@@ -32,25 +90,16 @@
     },
   });
   // fetch single Role  using id
-  getRoleApi(props.id).then((result) => {
+  getUserApi(props.id).then((result) => {
     formValue.value = result;
     formValue.value.permissions = formValue.value.permissions.map((v: any) => v.id);
-  });
-
-  const rules = ref({
-    name: {
-      required: true,
-      message: 'Please Enter Name',
-      trigger: 'blur',
-    },
   });
 
   const handleValidateClick = (e: MouseEvent) => {
     e.preventDefault();
     formRef.value?.validate((errors) => {
       if (!errors) {
-        const { name, description, permissions } = formValue.value;
-        updateRoleApi(formValue.value.id, { name, description, permissions }).then((result) => {
+        updateUserApi(formValue.value.id, formValue.value).then((result) => {
           window['$message'].success(result.message);
           emits('updated', result);
         });
@@ -60,6 +109,23 @@
       }
     });
   };
+  const rules = ref({
+    email: {
+      required: true,
+      message: 'Please Enter Name',
+      trigger: 'blur',
+    },
+    password: {
+      required: true,
+      message: 'Please Enter Password',
+      trigger: 'blur',
+    },
+    confirmPassword: {
+      required: true,
+      message: 'Please Enter Confirm Password',
+      trigger: 'blur',
+    },
+  });
 </script>
 
 <style lang="less" scoped></style>

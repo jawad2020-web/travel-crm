@@ -34,9 +34,15 @@
         </n-form-item>
       </n-col>
     </n-row>
-    <n-space justify="end">
-      <n-form-item :theme-overrides="{ labelHeightSmall: '0', feedbackHeightSmall: '0' }">
-        <n-button type="success" @click="handleValidateClick"> Update</n-button>
+    <n-space justify="end" :wrap="true" :size="0">
+      <n-form-item
+        :theme-overrides="{
+          feedbackHeightSmall: '0',
+          feedbackHeightMedium: '0',
+          labelHeightMedium: '0',
+        }"
+      >
+        <n-button type="success" @click="handleValidateClick">Update</n-button>
       </n-form-item>
     </n-space>
   </n-form>

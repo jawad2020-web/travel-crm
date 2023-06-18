@@ -25,7 +25,7 @@ export function getRolesApi(params: any) {
 /**
  * @description: Get single role
  */
-export function getRoleApi(id: any) {
+export function getRoleApi(id: number | undefined) {
   return http.request({
     url: `/roles/${id}`,
     method: 'get',
@@ -50,10 +50,10 @@ export function createRoleApi(params: any) {
 /**
  * @description: update role
  */
-export function updateRoleApi(roleId: any, params: any) {
+export function updateRoleApi(id: number, params: any) {
   return http.request<BasicResponseModel>(
     {
-      url: `/roles/${roleId}`,
+      url: `/roles/${id}`,
       method: 'PUT',
       params,
     },
@@ -65,9 +65,9 @@ export function updateRoleApi(roleId: any, params: any) {
 /**
  * @description: delete role
  */
-export function deleteRoleApi(roleId: any) {
+export function deleteRoleApi(id: number) {
   return http.request<BasicResponseModel>({
-    url: `/roles/${roleId}`,
+    url: `/roles/${id}`,
     method: 'DELETE',
   });
 }

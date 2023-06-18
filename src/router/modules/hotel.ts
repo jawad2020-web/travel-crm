@@ -15,7 +15,7 @@ const routes: Array<RouteRecordRaw> = [
       title: 'Hotels',
       icon: renderIcon(CartOutline),
       permissions: ['can view hotels menu'],
-      sort: 4,
+      sort: 3,
     },
     children: [
       {

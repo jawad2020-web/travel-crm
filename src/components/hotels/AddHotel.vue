@@ -45,7 +45,7 @@
           </n-col>
         </n-row>
       </n-space>
-      <n-space justify="end" :wrap="true" :size="0">
+      <n-space justify="end" :size="0">
         <n-form-item
           :theme-overrides="{
             feedbackHeightSmall: '0',
